@@ -26,7 +26,7 @@ public class ChatHandler implements WebSocketHandler {
     @Override
     public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
         String chatMessage = (String) message.getPayload();
-        session.sendMessage(new TextMessage("Started processing chat: " + chatMessage));
+        //session.sendMessage(new TextMessage("Message From User: "+session.getId()+"=>" + chatMessage));
        // System.out.println("############Started processing chat: " + chatMessage);
        broadcastMessage(chatMessage);
      
@@ -50,7 +50,7 @@ public class ChatHandler implements WebSocketHandler {
         // Iterate through all connected sessions and send the message
         for (WebSocketSession session : sessions) {
             try {
-                session.sendMessage(new TextMessage("Broadcast: " + message));
+                session.sendMessage(new TextMessage("Broadcast Message From User" +session.getId()+"=>"+ message));
             } catch (IOException e) {
                 log.error("Error broadcasting message to session: {}", session.getId(), e);
             }
